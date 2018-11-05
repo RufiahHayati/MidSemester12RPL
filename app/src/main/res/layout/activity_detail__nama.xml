@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".Detail_Nama">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/img_photo"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tusername"
+            android:text="Nama"
+            android:paddingTop="2dp"
+            android:layout_gravity="center"
+            android:fontFamily="cusual"
+            android:textColor="#303F9F"
+            android:textStyle="bold"
+            android:textSize="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/tdeskripsi"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_margin="15dp"
+                android:textStyle="bold"/>
+                <Button
+                    android:id="@+id/btn_trailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trailer"
+                    android:background="#303F9F"
+                    android:fontFamily="cusual"
+                    android:textSize="15dp"
+                    android:textColor="#ffff"
+                    android:textStyle="bold"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="20dp"
+            app:pressedTranslationZ="100dp"
+            android:src="@drawable/ic_favorite_border_black_24dp"
+            app:fabSize="normal"
+            app:elevation="5dp"
+            android:layout_alignParentRight="true" />
+
+</LinearLayout>

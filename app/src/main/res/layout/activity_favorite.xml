@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FavoriteActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/TextData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data Empty"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:textSize="15dp"
+            android:layout_marginTop="220dp"
+            android:visibility="gone"/>
+</RelativeLayout>
