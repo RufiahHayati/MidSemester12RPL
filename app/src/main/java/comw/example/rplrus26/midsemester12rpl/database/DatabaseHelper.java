@@ -1,8 +1,10 @@
 package comw.example.rplrus26.midsemester12rpl.database;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.view.menu.MenuBuilder;
 
 import static android.provider.BaseColumns._ID;
 import static comw.example.rplrus26.midsemester12rpl.database.DatabaseContract.MahasiswaColumns.NAMA;
@@ -47,4 +49,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
     }
+
+    public void clearDatabase() {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        String clearDBQuery = "DELETE FROM "+TABLE_NAME;
+        sqLiteDatabase.execSQL(clearDBQuery);
+    }
+
+    public void deleteEntry(long id) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_NAME, _ID + "=" + id, null);
+        sqLiteDatabase.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + _ID + " = " + id + ";");
+    }
+
 }

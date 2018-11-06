@@ -37,17 +37,9 @@ public class FavoriteActivity extends AppCompatActivity {
         mahasiswaHelper = new MahasiswaHelper(getApplicationContext());
         mahasiswaHelper.open();
         models = new ArrayList<>();
-
-        if (mahasiswaHelper.getAllData() == null){
-            TextData.setVisibility(View.VISIBLE);
-        }else if (mahasiswaHelper.getAllData() !=null){
-            models = mahasiswaHelper.getAllData();
-            //RView.setVisibility(View.VISIBLE);
-
-        }
         RView.setVisibility(View.VISIBLE);
         models = mahasiswaHelper.getAllData();
-
+        Log.e("TAG", "onCreate: "+models );
         adapter = new ModelAdapter(getApplicationContext(), models);
         RView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         RView.setAdapter(adapter);

@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -20,12 +21,15 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
 
+import comw.example.rplrus26.midsemester12rpl.database.DatabaseHelper;
 import comw.example.rplrus26.midsemester12rpl.database.MahasiswaHelper;
 import comw.example.rplrus26.midsemester12rpl.database.MahasiswaModel;
 
 public class Detail_Nama extends AppCompatActivity {
 
     MahasiswaHelper mahasiswaHelper;
+    DatabaseHelper databaseHelper;
+    MahasiswaModel mahasiswaModel;
     ImageView iv_nama;
     TextView tnama, tdeskripsi;
     Button btn_trailer;
@@ -34,14 +38,13 @@ public class Detail_Nama extends AppCompatActivity {
     String username;
     String deskripsi;
     String photoId;
+    String id;
     //String trailer;
     String movieId;
     String tanggal;
-    Button deletebtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail__nama);
 
@@ -50,6 +53,8 @@ public class Detail_Nama extends AppCompatActivity {
         tdeskripsi = findViewById(R.id.tdeskripsi);
         btn_trailer = findViewById(R.id.btn_trailer);
         mahasiswaHelper = new MahasiswaHelper(Detail_Nama.this);
+        databaseHelper = new DatabaseHelper(Detail_Nama.this);
+        mahasiswaModel = new MahasiswaModel();
         fab = findViewById(R.id.fab);
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
@@ -60,24 +65,21 @@ public class Detail_Nama extends AppCompatActivity {
         movieId = bundle.getString("id");
         tnama.setText(username);
         tdeskripsi.setText(deskripsi);
-        Glide.with(Detail_Nama.this)
-                .load(photoId)
-                .into(iv_nama);
+        Glide.with(Detail_Nama.this).load(photoId).into(iv_nama);
 
         //new ambilURLYoutube(movieId).execute((Void) null);
 
         btn_trailer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 //if (trailer.equals("trailer") || trailer == null)
                 //{
-                    //Tidak ada trailer
+                //Tidak ada trailer
                 //} else
                 //{
-                    String url = "https://youtu.be/u9Mv98Gr5pY";
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(i);
+                String url = "https://youtu.be/u9Mv98Gr5pY";
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(i);
                 //}
             }
         });
@@ -85,31 +87,32 @@ public class Detail_Nama extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(flag){
+                if (flag) {
                     mahasiswaHelper.open();
                     mahasiswaHelper.beginTransaction();
-                    MahasiswaModel m = new MahasiswaModel(username,deskripsi,photoId,tanggal);
+                    MahasiswaModel m = new MahasiswaModel(username, deskripsi, photoId, tanggal);
                     mahasiswaHelper.insertTransaction(m);
                     mahasiswaHelper.setTransactionSuccess();
                     mahasiswaHelper.endTransaction();
                     mahasiswaHelper.close();
-                    Snackbar.make(view, "Tersimpan", Snackbar.LENGTH_LONG)
-                            .setAction("Save", null).show();
+                    Snackbar.make(view, "Tersimpan", Snackbar.LENGTH_LONG).setAction("Save", null).show();
                     fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_black_24dp));
                     flag = false;
 
-                }else if(!flag){
-
+                } else if (!flag) {
+                    mahasiswaHelper.open();
+                    mahasiswaHelper.beginTransaction();
+                    int a = mahasiswaHelper.delete(id);
+                    mahasiswaHelper.endTransaction();
+                    mahasiswaHelper.close();
+                    Snackbar.make(view, "Cancel", Snackbar.LENGTH_LONG).setAction("cancel", null).show();
                     fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
-                    flag = true;
+//                    flag = true;
 
                 }
             }
         });
     }
-
-
-
 //    @android.annotation.SuppressLint("StaticFieldLeak")
 //    public class ambilURLYoutube extends AsyncTask<Void, Void, JSONObject> {
 //
@@ -200,4 +203,11 @@ public class Detail_Nama extends AppCompatActivity {
 //            }
 //        }
 //    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+
+    }
 }

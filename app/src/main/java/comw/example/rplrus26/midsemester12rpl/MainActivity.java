@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
                     startActivity(intent);
                     finish();
-
-
                 }else{
                     Toast.makeText(getApplicationContext(),"Ups!!Ada Yang Salah", Toast.LENGTH_SHORT).show();
                 }

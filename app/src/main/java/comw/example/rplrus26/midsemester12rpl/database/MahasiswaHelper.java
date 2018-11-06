@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.View;
+
 import java.util.ArrayList;
+
+import comw.example.rplrus26.midsemester12rpl.ModelAdapter;
 
 import static android.provider.BaseColumns._ID;
 import static comw.example.rplrus26.midsemester12rpl.database.DatabaseContract.MahasiswaColumns.NAMA;
@@ -24,7 +28,7 @@ public class MahasiswaHelper {
 
     private SQLiteDatabase database;
 
-    public MahasiswaHelper(Context context){
+    public MahasiswaHelper(Context context) {
         this.context = context;
     }
 
@@ -34,25 +38,26 @@ public class MahasiswaHelper {
         return this;
     }
 
-    public void close(){
+    public void close() {
         dataBaseHelper.close();
     }
 
     /**
      * Gunakan method ini untuk cari NIM berdasarkan nama mahasiswa
+     *
      * @param nama nama yang dicari
      * @return NIM dari mahasiswa
      */
-    public ArrayList<MahasiswaModel> getDataByName(String nama){
+    public ArrayList<MahasiswaModel> getDataByName(String nama) {
         String result = "";
-        Cursor cursor = database.query(TABLE_NAME,null,NAMA+" LIKE ?",new String[]{nama+ "%"},null,null,_ID + " ASC",null);
+        Cursor cursor = database.query(TABLE_NAME, null, NAMA + " LIKE ?", new String[]{nama + "%"}, null, null, _ID + " ASC", null);
         cursor.moveToFirst();
         ArrayList<MahasiswaModel> arrayList = new ArrayList<>();
         MahasiswaModel mahasiswaModel;
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             do {
                 mahasiswaModel = new MahasiswaModel();
-                mahasiswaModel.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
+                mahasiswaModel.setId(cursor.getString(cursor.getColumnIndexOrThrow(_ID)));
                 mahasiswaModel.setName(cursor.getString(cursor.getColumnIndexOrThrow(NAMA)));
                 mahasiswaModel.setNim(cursor.getString(cursor.getColumnIndexOrThrow(NIM)));
                 mahasiswaModel.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(URL)));
@@ -70,9 +75,10 @@ public class MahasiswaHelper {
 
     /**
      * Gunakan method ini untuk mendapatkan semua data mahasiswa
+     *
      * @return hasil query mahasiswa model di dalam arraylist
      */
-    public ArrayList<MahasiswaModel> getAllData(){
+    public ArrayList<MahasiswaModel> getAllData() {
         //Cursor cursor = database.query(TABLE_NAME,null,null,null,null,null,_ID+ " ASC",null);
 
         database.beginTransaction();
@@ -81,10 +87,10 @@ public class MahasiswaHelper {
         cursor.moveToFirst();
         ArrayList<MahasiswaModel> arrayList = new ArrayList<>();
         MahasiswaModel mahasiswaModel;
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             do {
                 mahasiswaModel = new MahasiswaModel();
-                mahasiswaModel.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
+                mahasiswaModel.setId(cursor.getString(cursor.getColumnIndexOrThrow(_ID)));
                 mahasiswaModel.setName(cursor.getString(cursor.getColumnIndexOrThrow(NAMA)));
                 mahasiswaModel.setNim(cursor.getString(cursor.getColumnIndexOrThrow(NIM)));
                 mahasiswaModel.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(URL)));
@@ -104,31 +110,31 @@ public class MahasiswaHelper {
     /**
      * Gunakan method ini untuk memulai sesi query transaction
      */
-    public void beginTransaction(){
+    public void beginTransaction() {
         database.beginTransaction();
     }
 
     /**
      * Gunakan method ini jika query transaction berhasil, jika error jangan panggil method ini
      */
-    public void setTransactionSuccess(){
+    public void setTransactionSuccess() {
         database.setTransactionSuccessful();
     }
 
     /**
      * Gunakan method ini untuk mengakhiri sesi query transaction
      */
-    public void endTransaction(){
+    public void endTransaction() {
         database.endTransaction();
     }
 
     /**
      * Gunakan method ini untuk query insert di dalam transaction
+     *
      * @param mahasiswaModel inputan model mahasiswa
      */
-    public void insertTransaction(MahasiswaModel mahasiswaModel){
-        String sql = "INSERT INTO "+TABLE_NAME+" ("+NAMA+", "+NIM+", "+URL+", "+TANGGAL
-                +") VALUES (?, ? , ? , ?)";
+    public void insertTransaction(MahasiswaModel mahasiswaModel) {
+        String sql = "INSERT INTO " + TABLE_NAME + " (" + NAMA + ", " + NIM + ", " + URL + ", " + TANGGAL + ") VALUES (?, ? , ? , ?)";
         SQLiteStatement stmt = database.compileStatement(sql);
         stmt.bindString(1, mahasiswaModel.getName());
         stmt.bindString(2, mahasiswaModel.getNim());
@@ -138,4 +144,24 @@ public class MahasiswaHelper {
         stmt.clearBindings();
         Log.d("sukses", "insertTransaction: ");
     }
+
+//    public void deleteTransaction(MahasiswaModel mahasiswaModel, String name) {
+//        String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + _ID + " = " + name + ";";
+//        SQLiteStatement stmt = database.compileStatement(sql);
+//        stmt.bindString(1, mahasiswaModel.getName());
+//        stmt.execute();
+//        stmt.clearBindings();
+//        Log.d("sukses", "deleteTransaction: ");
+//    }
+
+    public  int delete(String id)
+    {
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+        String[] whereArgs ={id};
+
+        int count =db.delete(TABLE_NAME ,_ID+" = ?",whereArgs);
+        return count;
+    }
+
+
 }

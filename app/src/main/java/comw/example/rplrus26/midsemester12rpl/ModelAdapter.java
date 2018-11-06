@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import comw.example.rplrus26.midsemester12rpl.database.DatabaseHelper;
+import comw.example.rplrus26.midsemester12rpl.database.MahasiswaHelper;
 import comw.example.rplrus26.midsemester12rpl.database.MahasiswaModel;
 
 public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
@@ -40,7 +42,6 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
 
     @Override
     public void onBindViewHolder(final RecyclerViewHolders holder, final int position) {
-
         final MahasiswaModel mahasiswaModel = MemberArrayList.get(position);
         Glide.with(context)
                 .load(mahasiswaModel.getUrl())
@@ -53,7 +54,7 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
                 final String deskripsi = MemberArrayList.get(position).getNim();
                 final String photoId = MemberArrayList.get(position).getUrl();
                 final String tanggal = MemberArrayList.get(position).gettanggal();
-                final int id = MemberArrayList.get(position).getId();
+                final String id = MemberArrayList.get(position).getId();
                 Intent i = new Intent(context.getApplicationContext(), Detail_Nama.class);
                 i.putExtra("id", id);
                 i.putExtra("username", username);
@@ -77,8 +78,6 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
         });
 
         holder.klik_btn.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -90,6 +89,15 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
                         // Do nothing but close the dialog
 //                        MemberArrayList.size();
 //                        MemberArrayList.remove(0);
+//                        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+//                        databaseHelper.deleteEntry(mahasiswaModel.getId());
+//                        MemberArrayList.remove(position);
+//                        notifyItemRemoved(position);
+//                        databaseHelper.deleteEntry(position);
+                        MahasiswaHelper mahasiswaHelper = new MahasiswaHelper(context);
+
+
+
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -99,8 +107,8 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
                         dialog.dismiss();
                     }
                 });
-                //AlertDialog alert = builder.create();
-                builder.show();
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }

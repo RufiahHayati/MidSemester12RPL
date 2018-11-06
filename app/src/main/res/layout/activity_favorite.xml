@@ -11,17 +11,15 @@
         android:id="@+id/Recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:visibility="gone"/>
+        android:scrollbars="vertical"/>
 
         <TextView
             android:id="@+id/TextData"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Data Empty"
             android:gravity="center"
             android:textStyle="italic"
             android:textSize="15dp"
-            android:layout_marginTop="220dp"
             android:visibility="gone"/>
 </RelativeLayout>
