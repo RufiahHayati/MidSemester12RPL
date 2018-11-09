@@ -131,7 +131,6 @@ public class Home extends AppCompatActivity {
     }
 
 
-
     @SuppressLint("StaticFieldLeak")
     public class ambildata extends AsyncTask<Void, Void, JSONObject> {
 

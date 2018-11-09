@@ -55,12 +55,14 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
                 final String photoId = MemberArrayList.get(position).getUrl();
                 final String tanggal = MemberArrayList.get(position).gettanggal();
                 final String id = MemberArrayList.get(position).getId();
+                final boolean flag = true;
                 Intent i = new Intent(context.getApplicationContext(), Detail_Nama.class);
                 i.putExtra("id", id);
                 i.putExtra("username", username);
                 i.putExtra("deskripsi", deskripsi);
                 i.putExtra("photo", photoId);
                 i.putExtra("tanggal", tanggal);
+                i.putExtra("flag",flag);
                 context.startActivity(i);
             }
         });
@@ -80,35 +82,25 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
         holder.klik_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context, "What The Heck Is Going On", Toast.LENGTH_SHORT).show();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Delete");
-                builder.setCancelable(true);
-                builder.setMessage(" Are you sure want to delete data ?");
+                builder.setMessage("Hapus Data?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing but close the dialog
-//                        MemberArrayList.size();
-//                        MemberArrayList.remove(0);
-//                        DatabaseHelper databaseHelper = new DatabaseHelper(context);
-//                        databaseHelper.deleteEntry(mahasiswaModel.getId());
-//                        MemberArrayList.remove(position);
-//                        notifyItemRemoved(position);
-//                        databaseHelper.deleteEntry(position);
-                        MahasiswaHelper mahasiswaHelper = new MahasiswaHelper(context);
-
-
-
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MemberArrayList.remove(position);
+                        notifyItemRemoved(position);
+                        Toast.makeText(context, "Horay", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(context, "Noooo", Toast.LENGTH_SHORT).show();
                     }
                 });
-                AlertDialog alert = builder.create();
-                alert.show();
+                builder.create();
             }
         });
     }

@@ -73,7 +73,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         });
 
         holder.klik_btn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -81,8 +80,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                 builder.setCancelable(true);
                 builder.setMessage(" Are you sure want to delete data ?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int i) {
                         // Do nothing but close the dialog
+
+                        MemberArrayList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, MemberArrayList.size());
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
