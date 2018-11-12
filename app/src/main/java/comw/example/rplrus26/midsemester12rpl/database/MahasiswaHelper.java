@@ -24,8 +24,6 @@ public class MahasiswaHelper {
     private DatabaseHelper dataBaseHelper;
     private SQLiteDatabase database;
 
-    database_sql2 myhelper;
-
     public MahasiswaHelper(Context context) {
         this.context = context;
     }
@@ -88,7 +86,7 @@ public class MahasiswaHelper {
         if (cursor.getCount() > 0) {
             do {
                 mahasiswaModel = new MahasiswaModel();
-            //    mahasiswaModel.setId(cursor.getString(cursor.getColumnIndexOrThrow(_ID)));
+                mahasiswaModel.setId(cursor.getString(cursor.getColumnIndexOrThrow(_ID)));
                 mahasiswaModel.setName(cursor.getString(cursor.getColumnIndexOrThrow(NAMA)));
                 mahasiswaModel.setNim(cursor.getString(cursor.getColumnIndexOrThrow(NIM)));
                 mahasiswaModel.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(URL)));
@@ -144,13 +142,13 @@ public class MahasiswaHelper {
     }
 
     public int delete(String uname) {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
         String[] whereArgs = {uname};
 
-        int count = db.delete(database_sql2.TABLE_NAME, database_sql2.title + " = ?", whereArgs);
+        int count = db.delete(TABLE_NAME, _ID + " = ?", whereArgs);
         return count;
     }
-
+/*
     static class database_sql2 extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "my_movie";    // Database Name
         private static final String TABLE_NAME = "my_table_movie";   // Table Name
@@ -190,5 +188,5 @@ public class MahasiswaHelper {
             }
         }
     }
-
+*/
 }
