@@ -20,8 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     public static String CREATE_TABLE_MAHASISWA = "create table "+TABLE_NAME+
-            " ("+_ID+" integer primary key autoincrement, " +
-            NAMA+" text not null, " +
+            " ("+NAMA+" text primary key, " +
             URL+" text not null, " +
             TANGGAL+" text not null, " +
             NIM+" text not null);";

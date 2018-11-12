@@ -22,14 +22,19 @@ import comw.example.rplrus26.midsemester12rpl.database.MahasiswaHelper;
 import comw.example.rplrus26.midsemester12rpl.database.MahasiswaModel;
 
 public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
-
+    MahasiswaModel mahasiswaModel;
     private List<MahasiswaModel> MemberArrayList;
     private Context context;
     private Parcelable more;
 
+    MahasiswaHelper mahasiswaHelper;
+    DatabaseHelper databaseHelper;
+    database_helper database_helper;
+
     public ModelAdapter(Context context, ArrayList<MahasiswaModel> MemberArrayList){
         this.context=context;
         this.MemberArrayList = MemberArrayList;
+        database_helper = new database_helper(context);
     }
 
     @Override
@@ -37,12 +42,16 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
 
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView);
+        mahasiswaHelper = new MahasiswaHelper(layoutView.getContext());
+        databaseHelper = new DatabaseHelper(layoutView.getContext());
         return rcv;
     }
 
+
+
     @Override
     public void onBindViewHolder(final RecyclerViewHolders holder, final int position) {
-        final MahasiswaModel mahasiswaModel = MemberArrayList.get(position);
+        mahasiswaModel = MemberArrayList.get(position);
         Glide.with(context)
                 .load(mahasiswaModel.getUrl())
                 .into(holder.personPhoto);
@@ -82,25 +91,12 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
         holder.klik_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "What The Heck Is Going On", Toast.LENGTH_SHORT).show();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Hapus Data?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        MemberArrayList.remove(position);
-                        notifyItemRemoved(position);
-                        Toast.makeText(context, "Horay", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(context, "Noooo", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                builder.create();
+                final int position2 = position;
+                final String name = mahasiswaModel.getName();
+                mahasiswaHelper.delete(name);
+                MemberArrayList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, MemberArrayList.size());
             }
         });
     }

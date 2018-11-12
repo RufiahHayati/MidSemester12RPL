@@ -93,11 +93,6 @@ public class Detail_Nama extends AppCompatActivity {
                     flag = false;
 
                 } else if (flag == false) {
-                    mahasiswaHelper.open();
-                    mahasiswaHelper.beginTransaction();
-                    int a = mahasiswaHelper.delete(id);
-                    mahasiswaHelper.endTransaction();
-                    mahasiswaHelper.close();
                     Snackbar.make(view, "Cancel", Snackbar.LENGTH_LONG).setAction("cancel", null).show();
                     fab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_favorite_border_black_24dp));
                     flag = true;
