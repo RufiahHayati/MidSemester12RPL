@@ -69,7 +69,6 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
                 i.putExtra("deskripsi", deskripsi);
                 i.putExtra("photo", photoId);
                 i.putExtra("tanggal", tanggal);
-                i.putExtra("flag",flag);
                 context.startActivity(i);
             }
         });
@@ -89,35 +88,17 @@ public class ModelAdapter extends RecyclerView.Adapter<RecyclerViewHolders>  {
         holder.klik_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Delete");
-                builder.setCancelable(true);
-                builder.setMessage(" Are you sure want to delete data ?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int i) {
-                        // Do nothing but close the dialog
-                        final int position2 = position;
-                        final String name = mahasiswaModel.getId();
-                        mahasiswaHelper.open();
-                        mahasiswaHelper.beginTransaction();
-                        mahasiswaHelper.delete(name);
-                        mahasiswaHelper.setTransactionSuccess();
-                        mahasiswaHelper.endTransaction();
-                        mahasiswaHelper.close();
-                        MemberArrayList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, MemberArrayList.size());
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
+                final int position2 = position;
+                final String name = mahasiswaModel.getId();
+                mahasiswaHelper.open();
+                mahasiswaHelper.beginTransaction();
+                mahasiswaHelper.delete(name);
+                mahasiswaHelper.setTransactionSuccess();
+                mahasiswaHelper.endTransaction();
+                mahasiswaHelper.close();
+                MemberArrayList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, MemberArrayList.size());
             }
         });
     }

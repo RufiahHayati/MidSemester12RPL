@@ -102,7 +102,6 @@ public class MahasiswaHelper {
         return arrayList;
     }
 
-
     /**
      * Gunakan method ini untuk memulai sesi query transaction
      */

@@ -55,24 +55,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        SharedPreferences sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
-        boolean stateValue = sharedPreferences.getBoolean("", false);
-
-        if (requestCode == MAIN_ACTIVITY_REQUEST_CODE) {
-
-            if (!stateValue){
-                finish();
-            }else {
-                updateLoginState(false);
-                super.onActivityResult(requestCode, resultCode, data);
-            }
-        }else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    private void updateLoginState(boolean b) {
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        SharedPreferences sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
+//        boolean stateValue = sharedPreferences.getBoolean("", false);
+//
+//        if (requestCode == MAIN_ACTIVITY_REQUEST_CODE) {
+//
+//            if (!stateValue){
+//                finish();
+//            }else {
+//                updateLoginState(false);
+//                super.onActivityResult(requestCode, resultCode, data);
+//            }
+//        }else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
+//
+//    private void updateLoginState(boolean b) {
+//    }
 }

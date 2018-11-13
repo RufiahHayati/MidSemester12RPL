@@ -68,16 +68,17 @@ public class Home extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.out:
-                SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                Intent intent = new Intent(Home.this,MainActivity.class);
-                startActivity(intent);
                 editor.clear();
                 editor.apply();
+                Intent intent = new Intent(Home.this,MainActivity.class);
+                startActivity(intent);
                 finish();
             case R.id.Favorite:
                 Intent a = new Intent(this,FavoriteActivity.class);
-                this.startActivity(a);
+                startActivity(a);
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -104,7 +105,6 @@ public class Home extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
-
 
 //        MemberArrayList = new ArrayList<Member>();
 //        for (int i =0; i < Member.length; i++){
