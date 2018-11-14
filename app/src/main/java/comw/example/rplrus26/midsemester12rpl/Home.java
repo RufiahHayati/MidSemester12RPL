@@ -33,7 +33,6 @@ public class Home extends AppCompatActivity {
 
     public ArrayList<Member>MemberArrayList = new ArrayList<>();
     RecyclerView gv_nama;
-    int index;
     Member member;
     RecyclerViewAdapter adapter;
     JSONArray Hasiljson;
@@ -55,9 +54,9 @@ public class Home extends AppCompatActivity {
 //            {"  Kim Hanbin", "Rapper dan Penyayi, B.I merupakan seorang rapper, penyanyi, penari, penulis lagu, koreografer asal Korea Selan yang lahir pada tanggal 22 Oktober 1996 di Korea Selatan, B.I lahir dengan nama lengkap Kim Han-bin."},
 //    };
 //
-//    int [] image_idol = new int[]{
-//            R.drawable.jinyoung, R.drawable.jhope, R.drawable.mingyu, R.drawable.minhyuk, R.drawable.wonho, R.drawable.seehun, R.drawable.kim, R.drawable.jimin, R.drawable.hanbin
-//    };
+    int [] image_idol = new int[]{
+            R.drawable.jinyoung, R.drawable.jhope, R.drawable.mingyu, R.drawable.minhyuk, R.drawable.wonho, R.drawable.seehun, R.drawable.kim, R.drawable.jimin, R.drawable.hanbin
+    };
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
