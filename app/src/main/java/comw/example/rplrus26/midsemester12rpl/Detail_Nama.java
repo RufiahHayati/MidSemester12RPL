@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,6 +41,9 @@ public class Detail_Nama extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail__nama);
+        Toolbar toolbar = findViewById(R.id.toolbar_detail);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         iv_nama = findViewById(R.id.img_photo);
         tnama = findViewById(R.id.tusername);
@@ -101,6 +105,14 @@ public class Detail_Nama extends AppCompatActivity {
             }
         });
     }
+
+    public boolean onSupportNavigateUp() {
+        startActivity(new Intent(this, Home.class));
+        finish();
+        return true;
+
+    }
+
 //    @android.annotation.SuppressLint("StaticFieldLeak")
 //    public class ambilURLYoutube extends AsyncTask<Void, Void, JSONObject> {
 //

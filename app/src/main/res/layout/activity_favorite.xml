@@ -7,6 +7,17 @@
     android:orientation="vertical"
     tools:context=".FavoriteActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Recycler"
         android:layout_width="match_parent"

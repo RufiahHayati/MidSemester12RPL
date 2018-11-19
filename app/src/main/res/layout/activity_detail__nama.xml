@@ -8,6 +8,17 @@
     android:layout_gravity="center"
     tools:context=".Detail_Nama">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:elevation="6dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -47,7 +58,7 @@
                     android:textSize="15dp"
                     android:textColor="#ffff"
                     android:textStyle="bold"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginLeft="15dp"/>
 

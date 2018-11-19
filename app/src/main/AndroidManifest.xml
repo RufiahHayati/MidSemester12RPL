@@ -21,7 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Home" />
-        <activity android:name=".Detail_Nama" />
-        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".Detail_Nama"
+                  android:label="Detail"/>
+        <activity android:name=".FavoriteActivity"
+                  android:label="Favorite"/>
     </application>
+
 </manifest>
